@@ -9,9 +9,9 @@ loop:
 
 .L3:
   movq    %rdi, %r8        # x in %r8
-  andq    %rdx, %r8        # upper 4 bytes of %rd8 = 0, lower four are the same 
+  andq    %rdx, %r8        # upper 4 bytes of %r8 = 0, lower four are the same 
   orq     %r8, %rax        #          
-  salq    %cl, %rdx        # 
+  salq    %cl, %rdx        # shift 
 
 .L2:
   testq   %rdx, %rdx       # OBVIOUSLY TYPO...LOOK INTO THIS
@@ -22,12 +22,14 @@ loop:
 
 long loop(long x, long n)
 {
-  long result = ;
+  long result = 0;
   long mask;
   
-  for (mask = ; mask ; mask = ){
+  //FINISH UPDATING CONDITION 
 
-    result |= ;
+  for (mask = x & 1; mask ; mask = result){
+
+    result |= mask;
     
   }
     
@@ -39,17 +41,22 @@ long loop(long x, long n)
 
 /*
 
-A. 
+A. x \in %rdi, n \in %esi, result \in %rax, 
 
-B. 
+We know result must be in %rax because that is the value that is returned. 
+%r8 must be mask given how it is updated during the loops.
 
-C. 
+B. result is initially 0 (thanks to the movl $0, %eax instruction)
 
-D.
+mask is initially (x & 1), where 1 is only in the first bit of the register.
 
-E.
+C. The test condition is if result and 
 
-F.
+D. 1 is shifted by the lower byte of n at the end of every iteration. 
+
+E. Result is or'd with mask
+
+F. See above.
 
 
  */
