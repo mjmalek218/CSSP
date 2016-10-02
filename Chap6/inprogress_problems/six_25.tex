@@ -1,0 +1,53 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[margin = .5in]{geometry}
+
+\begin{document}
+
+\noindent \textbf{Exercise Number: 6.2.5}  %% FILL THIS IN
+
+\medskip 
+
+\noindent In this problem we are required to fill in the given table related to
+cache memories/specs. It is quite simple once the relation $C = S \times B \times E$ is recalled, as well as $t = m - s - b$.
+
+\bigskip
+
+\begin{center}
+  \begin{tabular}{l*{7}{c}r}
+    Cache &   $m$   &   $C$   &  $B$ &   $E$  &   $S$   &   $t$   &  $s$  &   $b$   \\ \hline
+
+    1     &   32    &   1024  &  4   &    4   &   64    &   24    &   6   &   2  \\
+
+    2     &   32    &   1024  &  4   &   256  &  1      &   30    &   0   &  2    \\
+
+    3     &   32    &   1024  &  8   &   1    &  128    &   22    &   7   &  3    \\
+
+    4     &   32    &   1024  &  8    &   128 &  1      &   29    &   0   &  3    \\
+
+    5     &   32    &   1024  &  32   &   1   &  32     &   22    &   5   &  5     \\
+
+    6     &   32    &   1024  &  32   &  4    &  8      &   24   &   3    &  5    \\
+
+  \end{tabular}
+\end{center}
+
+\bigskip
+
+\bigskip
+
+\noindent \textbf{Discussion.}
+
+A few things to recognize here, primarily the general pattern/cost of increasing one aspect of the 
+cache and its influence on another aspects.
+
+In all cases above, the cache is a fixed size 1024 bytes. Caches 2 and 4 are fully associative
+(like virtual memory) whereas caches 3 and 5 are direct mapped (closer to smaller caches).
+
+Also in general there are quite a few tag bits. The larger the number of tag bits, the greater
+the disparity between the size of the cache and the size of main memory (or whatever the lower
+level is that it's calling from). 
+
+\end{document} 
