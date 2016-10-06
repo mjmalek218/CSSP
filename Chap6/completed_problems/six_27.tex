@@ -1,0 +1,82 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[margin = .5in]{geometry}
+\usepackage{enumerate}
+
+\begin{document}
+
+\noindent \textbf{Exercise Number: 6.2.7}  %% FILL THIS IN
+
+\medskip 
+
+\noindent In this problem, we are asked to list specific memory addresses that are 13 bits long, 
+so naturally if we represent memory addresses in hex there will be 4 hexadecimal digits
+required, with the last one only varying between 0 and 1--regardless of other constraints
+imposed by the further specifications of this problem.
+
+There are also 2 block bits and 3 set bits.
+
+\begin{enumerate}[A.]
+
+\item In our first problem, let $x$ denote an arbitrary bit: 0 or 1. If we know $S = 1$, then the
+set bits must be 001, and so we have the following general format for any adress satisfying our
+constraints: 
+
+\begin{center}
+  \begin{tabular}{*{13}{|c} |}
+    
+    \hline
+    x  & x & x & x & x & x & x & x  & 0  & 0  & 1 & x & x     \\ \hline
+  \end{tabular}
+\end{center}
+
+Since we partition these into 4 to digits each, starting from the left, and the $x$'s are allowed
+to vary freely, it follows that of the five hex digits we could possibly have representing this
+address:
+
+\begin{enumerate}
+
+\item The first will be any binary number the first two bits could possibly be, plus $4$, so
+4, 5, 6, 7.
+
+\item Second one must have first bit 0, so it is all even numbers from 0 to 15
+
+\item Third is allowed to vary freely
+
+\item Fourth can only be 0 or 1, since it is only one bit. 
+
+\end{enumerate}
+
+\item Essentially we have the same structure here, except it's in the format:
+
+\begin{center}
+  \begin{tabular}{*{13}{|c} |}
+    
+    \hline
+    x  & x & x & x & x & x & x & x  & 1  & 1  & 0 & x & x     \\ \hline
+  \end{tabular}
+\end{center}
+
+
+\begin{enumerate}
+
+\item The first will be any binary number the first two bits could possibly be, plus $8$, so
+8, 9, 10, 11.
+
+\item Second one must have first bit 1, so it is all odd numbers from 0 to 15
+
+\item Third is allowed to vary freely
+
+\item Fourth can only be 0 or 1, since it is only one bit. 
+
+\end{enumerate}
+
+
+\end{enumerate}
+
+\noindent \textbf{Discussion.} Not much to discuss here...just kind of going through the motions.
+
+
+\end{document} 
