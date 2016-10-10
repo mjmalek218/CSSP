@@ -1,0 +1,120 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[margin = .5in]{geometry}
+\usepackage{enumerate}
+
+\begin{document}
+
+\noindent \textbf{Exercise Number: 6.29}  %% FILL THIS IN
+
+\medskip 
+
+We have the following assumptions:
+
+\begin{itemize}
+
+\item Memory is byte-addressable, that is to say, addresses represent a location containing
+a byte of memory
+
+\item Memory accesses are 1-byte words, meaning the block of memory access, sent through the
+memory bus, and loaded into the cache at once is a byte of memory
+
+\item Address are 12 bit wide ($m  = 12$) 
+
+\item Two lines per set ($E=2$), 4-byte block size ($B = 4$), and four sets or $S = 4$.
+
+\end{itemize}
+
+Below is a table of the contents of the cache at the beginning of the problem. Note the bytes 
+are represented with 2 hex digits. 
+
+\bigskip
+
+\begin{center}
+  \begin{tabular}{*{7}{c}}
+   Set Index  &   Tag   &   Valid   &  Byte0 &   Byte1  &   Byte2   &   Byte3   \\ \hline
+
+    0         &   00    &   1       &  40    &    41    &   42      &   43  \\
+
+    0         &   83    &   1       &  FE    &   97     &   CC      &   D0  \\
+
+    1         &   00    &   1       &  44    &   45     &   46      &   47  \\
+
+    1         &   83    &   0       & --     &   --     &   --      &   --  \\
+
+    2         &   00    &   1      &  48     &   49     &  4A     &   4B    \\
+
+    2         &   40    &   0      &  --     &   --     &  --      &   --   \\
+
+    3         &   FF    &   1      &  9A   &   C0    &  03     &   FF       \\
+
+    3         &   00    &   0       &  --    &  --  &  --      &   --       \\
+
+  \end{tabular}
+\end{center}
+
+\bigskip
+
+
+\begin{enumerate}[A.]
+
+\item We fill in the given diagram (which erroneously presents 13 bits: that is corrected here)
+where t represents a tag bit, s a set bit, and b a block bit. The lower row represents the index of the bit
+
+\begin{center}
+  \begin{tabular}{*{12}{|c} |}
+    
+    \hline
+    t & t & t & t & t & t & t  & t  & s  & s & b & b     \\ \hline
+    11 & 10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 1 & 0
+
+  \end{tabular}
+\end{center}
+
+In other words, there are 8 tag bits, 2 set bits, and 2 block offset bits. 
+
+\item We fill in the given table as presented, and then explain the logic behind the solution
+and the above diagram. 
+
+\begin{center}
+  \begin{tabular}{*{7}{c}}
+   Operation  &   Address  &   Hit?   &  Read Value (or unknown)  \\ \hline
+
+    Read      &   0x834    &   No     &  Unknown \\
+
+    Write     &   0x836    &   Yes    &   Unknown         \\
+
+    Read     &   0xFFD    &  Yes   &   9A      \\ 
+
+  \end{tabular}
+\end{center}
+ 
+\begin{enumerate}
+
+\item The first instruction has tag bits 83, or set + block bits represented by hex 4. This 
+translates to 01 set bits (or set 1) and 00 block bits (or block 0). The tag 83 is in the 
+second line of the first set, but the valid bit in this line is 0 so the cache misses. 
+
+\item The second intruction ends with a 6 which has binary representation 0110. This means 
+the set referenced is 1 and the block offset is 2. Since this is in the line that previously
+missed, the cache is now warmed up and we have a hit. This is a write operation so the CPU
+isn't seeking to retrieve anything from memory: this implies that we can only put down that the value is unknown.  
+
+\item D has binary representation 1101. This means that set 3 is referenced here, tag FF. 
+Looking in the table we can see that this is a hit. The request retrieve block offset 01, 
+or byte0 = 9A.  
+
+\end{enumerate}
+
+\end{enumerate}
+
+\bigskip
+
+\noindent \textbf{Discussion.} Not much to see here...fairly routine operation. The point is
+to give some intuition for how cache mappings work: two of the miss operations presented were
+within the same line, which makes sense because their addresses were so similar. The cache then 
+warms up and the second operation is a hit.  
+
+\end{document} 
